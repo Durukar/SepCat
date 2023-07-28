@@ -1,0 +1,7 @@
+@startuml
+class br.com.SepCatServer.Backend.controllers.UserController {
+- UserService service
++ ResponseEntity<List<User>> findAll()
++ ResponseEntity<User> findById(Long)
+}
+@enduml

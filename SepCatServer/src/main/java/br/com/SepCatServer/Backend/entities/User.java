@@ -3,6 +3,8 @@ package br.com.SepCatServer.Backend.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +19,9 @@ public class User implements Serializable {
     private String email;
     private String password;
 
+    @OneToMany(mappedBy = "author")
+    private List<Inssue> inssues = new ArrayList<>();
+
     public User() {
     }
 
@@ -25,6 +30,9 @@ public class User implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+    public List<Inssue> getInssues() {
+        return inssues;
     }
 
     public Long getId() {
