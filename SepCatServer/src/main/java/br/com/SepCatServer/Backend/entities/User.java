@@ -1,5 +1,6 @@
 package br.com.SepCatServer.Backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class User implements Serializable {
     private String email;
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "author")
     private List<Inssue> inssues = new ArrayList<>();
 
