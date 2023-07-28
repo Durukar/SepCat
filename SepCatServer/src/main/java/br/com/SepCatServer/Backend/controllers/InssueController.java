@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/inssues")
+@RequestMapping(value = "/api/v1")
 public class InssueController {
 
     @Autowired
     private InssueService service;
 
-    @GetMapping
+    @GetMapping(value = "/inssues")
     public ResponseEntity<List<Inssue>> findAll() {
         List<Inssue> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/inssues/{id}")
     public ResponseEntity<Inssue> findById(@PathVariable Long id) {
         Inssue obj = service.findById(id);
         return ResponseEntity.ok().body(obj);

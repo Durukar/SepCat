@@ -1,5 +1,6 @@
 package br.com.SepCatServer.Backend.entities;
 
+import br.com.SepCatServer.Backend.entities.enums.InssueStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -20,6 +21,9 @@ public class Inssue implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
+
+    private Integer inssueStatus;
+
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
@@ -27,9 +31,10 @@ public class Inssue implements Serializable {
     public Inssue() {
     }
 
-    public Inssue(Long id, Instant moment, User author) {
+    public Inssue(Long id, Instant moment,InssueStatus inssueStatus, User author) {
         this.id = id;
         this.moment = moment;
+        setInssueStatus(inssueStatus);
         this.author = author;
     }
 
@@ -47,6 +52,16 @@ public class Inssue implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public InssueStatus getInssueStatus() {
+        return InssueStatus.valueOf(inssueStatus);
+    }
+
+    public void setInssueStatus(InssueStatus inssueStatus) {
+        if (inssueStatus != null) {
+            this.inssueStatus = inssueStatus.getCode();
+        }
     }
 
     public User getAuthor() {

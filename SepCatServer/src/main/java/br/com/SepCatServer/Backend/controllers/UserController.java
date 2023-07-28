@@ -12,19 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/api/v1")
 public class UserController {
 
     @Autowired
     private UserService service;
 
     @GetMapping
+    public String hello() {
+            return "<h1>WELCOME TO SEPCAT</h1>" +
+                    "<h2>API REST</h2>" +
+                    "<h3>Endpoints:</h3>" +
+                    "<ul><li>/users</li></ul>";
+    }
+
+    @GetMapping(value = "/users")
     public ResponseEntity<List<User>> findAll() {
         List<User> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/users/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
         User obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
