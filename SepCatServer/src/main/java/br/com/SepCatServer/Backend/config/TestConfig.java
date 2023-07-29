@@ -1,8 +1,10 @@
 package br.com.SepCatServer.Backend.config;
 
+import br.com.SepCatServer.Backend.entities.Category;
 import br.com.SepCatServer.Backend.entities.Inssue;
 import br.com.SepCatServer.Backend.entities.User;
 import br.com.SepCatServer.Backend.entities.enums.InssueStatus;
+import br.com.SepCatServer.Backend.repositories.CategoryRepository;
 import br.com.SepCatServer.Backend.repositories.InssueRepository;
 import br.com.SepCatServer.Backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,17 @@ public class TestConfig implements CommandLineRunner {
     private UserRepository usersRepository;
     @Autowired
     private InssueRepository inssueRepository;
-
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
+        Category cat1 = new Category(null, "Bug");
+        Category cat2 = new Category(null, "Melhoria");
+        Category cat3 = new Category(null, "Nova feature");
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "1234");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "1234");
 
