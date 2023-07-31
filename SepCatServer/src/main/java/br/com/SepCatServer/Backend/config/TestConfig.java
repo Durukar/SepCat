@@ -1,10 +1,12 @@
 package br.com.SepCatServer.Backend.config;
 
 import br.com.SepCatServer.Backend.entities.Category;
+import br.com.SepCatServer.Backend.entities.Form;
 import br.com.SepCatServer.Backend.entities.Inssue;
 import br.com.SepCatServer.Backend.entities.User;
 import br.com.SepCatServer.Backend.entities.enums.InssueStatus;
 import br.com.SepCatServer.Backend.repositories.CategoryRepository;
+import br.com.SepCatServer.Backend.repositories.FormRepository;
 import br.com.SepCatServer.Backend.repositories.InssueRepository;
 import br.com.SepCatServer.Backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class TestConfig implements CommandLineRunner {
     private InssueRepository inssueRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private FormRepository formRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -32,7 +36,15 @@ public class TestConfig implements CommandLineRunner {
         Category cat2 = new Category(null, "Melhoria");
         Category cat3 = new Category(null, "Nova feature");
 
+        Form f1 = new Form(null, "Form 1", "Custumer 1", "Description 1");
+        Form f2 = new Form(null, "Form 2", "Custumer 2", "Description 2");
+        Form f3 = new Form(null, "Form 3", "Custumer 3", "Description 3");
+        Form f4 = new Form(null, "Form 4", "Custumer 4", "Description 4");
+        Form f5 = new Form(null, "Form 5", "Custumer 5", "Description 5");
+        Form f6 = new Form(null, "Form 6", "Custumer 6", "Description 6");
+
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+        formRepository.saveAll(Arrays.asList(f1, f2, f3, f4, f5, f6));
 
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "1234");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "1234");
