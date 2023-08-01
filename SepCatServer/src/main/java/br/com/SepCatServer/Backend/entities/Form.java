@@ -29,6 +29,9 @@ public class Form implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.form")
+    private Set<InssueItem> items = new HashSet<>();
+
     public Form() {
     }
 
@@ -90,6 +93,13 @@ public class Form implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    public Set<Inssue> getInssues() {
+        Set<Inssue> set = new HashSet<>();
+        for(InssueItem x : items) {
+            set.add(x.getInssue());
+        }
     }
 
     @Override
