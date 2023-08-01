@@ -21,7 +21,10 @@ public class Form implements Serializable {
     private String description;
     private String comments;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_form_category",
+            joinColumns = @JoinColumn(name = "form_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     public Form() {
