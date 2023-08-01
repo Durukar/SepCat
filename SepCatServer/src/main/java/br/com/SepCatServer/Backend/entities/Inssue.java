@@ -2,12 +2,13 @@ package br.com.SepCatServer.Backend.entities;
 
 import br.com.SepCatServer.Backend.entities.enums.InssueStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "sep_inssues")
@@ -27,6 +28,9 @@ public class Inssue implements Serializable {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
+
+    @OneToMany(mappedBy = "id.inssue")
+    private Set<InssueItem> items = new HashSet<>();
 
     public Inssue() {
     }
@@ -70,6 +74,10 @@ public class Inssue implements Serializable {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public Set<InssueItem> getItems() {
+        return items;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package br.com.SepCatServer.Backend.entities;
 
 import br.com.SepCatServer.Backend.entities.pk.InssueItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -15,24 +16,25 @@ public class InssueItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private InssueItemPK id;
+    private InssueItemPK id = new InssueItemPK();
 
     @Getter
     private Integer quantity;
 
     @Getter
-    private Double priority;
+    private Integer priority;
 
     public InssueItem(){
     }
 
-    public InssueItem(Inssue inssue, Form form, Integer quantity, Double priority) {
+    public InssueItem(Inssue inssue, Form form, Integer quantity, Integer priority) {
         id.setInssue(inssue);
         id.setForm(form);
         this.quantity = quantity;
         this.priority = priority;
     }
 
+    @JsonIgnore
     public Inssue getInssue() {
         return id.getInssue();
     }
@@ -53,7 +55,7 @@ public class InssueItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public void setPriority(Double priority) {
+    public void setPriority(Integer priority) {
         this.priority = priority;
     }
 

@@ -1,14 +1,8 @@
 package br.com.SepCatServer.Backend.config;
 
-import br.com.SepCatServer.Backend.entities.Category;
-import br.com.SepCatServer.Backend.entities.Form;
-import br.com.SepCatServer.Backend.entities.Inssue;
-import br.com.SepCatServer.Backend.entities.User;
+import br.com.SepCatServer.Backend.entities.*;
 import br.com.SepCatServer.Backend.entities.enums.InssueStatus;
-import br.com.SepCatServer.Backend.repositories.CategoryRepository;
-import br.com.SepCatServer.Backend.repositories.FormRepository;
-import br.com.SepCatServer.Backend.repositories.InssueRepository;
-import br.com.SepCatServer.Backend.repositories.UserRepository;
+import br.com.SepCatServer.Backend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +23,8 @@ public class TestConfig implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     @Autowired
     private FormRepository formRepository;
+    @Autowired
+    private InssueItemRepository inssueItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,12 +32,12 @@ public class TestConfig implements CommandLineRunner {
         Category cat2 = new Category(null, "Melhoria");
         Category cat3 = new Category(null, "Nova feature");
 
-        Form f1 = new Form(null, "Form 1", "Custumer 1", "Description 1");
-        Form f2 = new Form(null, "Form 2", "Custumer 2", "Description 2");
-        Form f3 = new Form(null, "Form 3", "Custumer 3", "Description 3");
-        Form f4 = new Form(null, "Form 4", "Custumer 4", "Description 4");
-        Form f5 = new Form(null, "Form 5", "Custumer 5", "Description 5");
-        Form f6 = new Form(null, "Form 6", "Custumer 6", "Description 6");
+        Form f1 = new Form(null, "Form 1", "Custumer 1", "Description 1",5);
+        Form f2 = new Form(null, "Form 2", "Custumer 2", "Description 2", 3);
+        Form f3 = new Form(null, "Form 3", "Custumer 3", "Description 3",4);
+        Form f4 = new Form(null, "Form 4", "Custumer 4", "Description 4",2);
+        Form f5 = new Form(null, "Form 5", "Custumer 5", "Description 5",1);
+        Form f6 = new Form(null, "Form 6", "Custumer 6", "Description 6",5);
 
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
         formRepository.saveAll(Arrays.asList(f1, f2, f3, f4, f5, f6));
@@ -64,5 +60,12 @@ public class TestConfig implements CommandLineRunner {
 
         usersRepository.saveAll(Arrays.asList(u1, u2));
         inssueRepository.saveAll(Arrays.asList(i1, i2, i3));
+
+        InssueItem io1 = new InssueItem(i1, f1, 2, f1.getPriority());
+        InssueItem io2 = new InssueItem(i1, f3, 1, f3.getPriority());
+        InssueItem io3 = new InssueItem(i2, f3, 2, f3.getPriority());
+        InssueItem io4 = new InssueItem(i3, f5, 2, f5.getPriority());
+
+        inssueItemRepository.saveAll(Arrays.asList(io1, io2, io3, io4));
     }
 }

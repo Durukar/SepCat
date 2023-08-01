@@ -19,6 +19,8 @@ public class Form implements Serializable {
     private String title;
     private String custumer;
     private String description;
+
+    private Integer priority;
     private String comments;
 
     @ManyToMany
@@ -30,11 +32,12 @@ public class Form implements Serializable {
     public Form() {
     }
 
-    public Form(Long id, String title, String custumer, String description) {
+    public Form(Long id, String title, String custumer, String description, Integer priority) {
         this.id = id;
         this.title = title;
         this.custumer = custumer;
         this.description = description;
+        this.priority = priority;
     }
 
     public Long getId() {
@@ -67,6 +70,14 @@ public class Form implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer  getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 
     public String getComments() {
