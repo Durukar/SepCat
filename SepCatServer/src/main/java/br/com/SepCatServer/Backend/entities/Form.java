@@ -1,5 +1,6 @@
 package br.com.SepCatServer.Backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -95,11 +96,13 @@ public class Form implements Serializable {
         return categories;
     }
 
+    @JsonIgnore
     public Set<Inssue> getInssues() {
         Set<Inssue> set = new HashSet<>();
         for(InssueItem x : items) {
             set.add(x.getInssue());
         }
+        return set;
     }
 
     @Override
