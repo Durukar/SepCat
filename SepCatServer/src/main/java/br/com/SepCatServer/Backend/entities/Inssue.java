@@ -32,6 +32,9 @@ public class Inssue implements Serializable {
     @OneToMany(mappedBy = "id.inssue")
     private Set<InssueItem> items = new HashSet<>();
 
+    @OneToOne(mappedBy = "inssue", cascade = CascadeType.ALL)
+    private FinishInssue finishInssue;
+
     public Inssue() {
     }
 
@@ -74,6 +77,14 @@ public class Inssue implements Serializable {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public FinishInssue getFinishInssue() {
+        return finishInssue;
+    }
+
+    public void setFinishInssue(FinishInssue finishInssue) {
+        this.finishInssue = finishInssue;
     }
 
     public Set<InssueItem> getItems() {

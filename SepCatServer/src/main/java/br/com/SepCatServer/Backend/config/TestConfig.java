@@ -54,8 +54,8 @@ public class TestConfig implements CommandLineRunner {
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "1234");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "1234");
 
-        Inssue i1 = new Inssue (null, Instant.parse("2019-06-20T19:53:07Z"), InssueStatus.ABERTO,  u1);
-        Inssue i2 = new Inssue (null, Instant.parse("2019-07-21T03:42:10Z"), InssueStatus.FECHADO, u2);
+        Inssue i1 = new Inssue (null, Instant.parse("2019-06-20T19:53:07Z"), InssueStatus.FECHADO,  u1);
+        Inssue i2 = new Inssue (null, Instant.parse("2019-07-21T03:42:10Z"), InssueStatus.ABERTO, u2);
         Inssue i3 = new Inssue (null, Instant.parse("2019-07-22T15:21:22Z"), InssueStatus.RASCUNHO, u1);
 
         usersRepository.saveAll(Arrays.asList(u1, u2));
@@ -67,5 +67,10 @@ public class TestConfig implements CommandLineRunner {
         InssueItem io4 = new InssueItem(i3, f5, 2, f5.getPriority());
 
         inssueItemRepository.saveAll(Arrays.asList(io1, io2, io3, io4));
+
+        FinishInssue finish1 = new FinishInssue(null, Instant.parse("2019-06-20T19:53:07Z"), i1);
+        i1.setFinishInssue(finish1);
+
+        inssueRepository.save(i1);
     }
 }
